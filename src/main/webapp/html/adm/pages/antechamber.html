@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:form="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta http-equiv="refresh" content="60">
+
+    <title>MDS2</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">ANTECHAMBER</a>
+        </div>
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Menu<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="elfinder.html">ONEDATA files</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Order parameter</a>
+                            </li>
+                            <li>
+                                <a href="antechamber.html">Antechamber</a>
+                            </li>
+
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header"> NMR ORDER PARAMETER ANALYSIS</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <dl class="intro">
+            <dd class="summary">
+                The most common use of the <b>Antechamber</b> program suite is to prepare
+                input files for LEaP, starting from a three-dimensional structure, as found in a PDB file.
+                The antechamber suite automates the process of developing a charge distribution and assigning atom
+                types, and partially automates the process of developing parameters for the various combinations
+                of atom types found in a given molecule. Antechamber can automatically generate input force field
+                parameters for most organic molecules, thereby allowing users to use AMBER, also through AMPS-NMR web portal, to
+                refine the structure of protein-ligand adducts.
+            </dd>
+
+        </dl>
+        <br />
+        <form id="inForm" action="/uploadAntechamber" method="post"  enctype="multipart/form-data" anable="" >
+            <fieldset>
+                <legend>Setup input</legend>
+                <!--<div id="menu">
+                    <input type="radio" name="menu_item" id="manu_item" value="residue">Load residue OR
+                    <input type="radio" name="menu_item" id="manu_item" value="metal">Define metal ion
+                </div>-->
+                <span style="color: black">You can upload residue (.pdb or .mol2 file):</span>
+                <div id="residue" style="border-width: 2px; border-style: dotted; border-color: #D8D8D8; ">
+                    <table>
+                        <tr>
+                            <td>
+                                Type*:
+                            </td>
+                            <td>
+                                <select name="type_in" id="type_in">
+                                    <option value="pdb">pdb</option>
+                                    <option value="mol2">mol2</option>
+                                </select>
+                            </td>
+                            <td>
+                                File*:
+                            </td>
+                            <td>
+                                <input type="file" id="file_name" name="file_name"  />
+                            </td>
+                            <td>
+                                Charge:
+                            </td>
+                            <td>
+                                <input type="text" maxlength="2" size="1" id="charge" name="charge" value="0" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Charge Methods:
+                            </td>
+                            <td>
+                                <select name="charge_type" id="charge_type">
+                                    <option value="gas">Gasteiger</option>
+                                    <option value="bcc">AM1-BCC</option>
+                                </select>
+                            </td>
+                            <td>
+                                Rename residue:
+                            </td>
+                            <td>
+                                <input type="text" maxlength="3" size="2" id="res_name" name="res_name" value="MOL" />
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <center><input id="subdata1" type="submit" name="submitData" value="Load residue" onClick="show_loading(this);$('#span_metal').hide();$('#metal').hide();">
+                        <input id="reload" type="button" name="clear" value="Reset" onClick="reloadPage()" /></center>
+                    <!--<br /> <br />
+                    <span class="note">*Required</span>-->
+                </div>
+                <br />
+                <span id="span_metal" style="color: black">or define single metal ion:</span><br />
+                <div id="metal" style="border-width: 2px; border-style: dotted; border-color: #D8D8D8;">
+
+                    <table>
+                        <tr>
+                            <td>
+                                Atom name* <br><span class="note">e.g. CA2</span>
+                            </td>
+                            <td>
+                                <input type="text" id="met_atom_name" size="3" maxlength="3"/>
+                            </td>
+                            <td>
+                                Element* <br><span class="note">e.g. Ca</span>
+                            </td>
+                            <td>
+                                <input type="text" id="met_element" size="2" maxlength="2"/>
+                            </td>
+                            <td>
+                                Residue name*<br><span class="note">e.g. XM1</span>
+                            </td>
+                            <td>
+                                <input type="text" id="met_res_name" size="3" maxlength="3"/>
+                            </td>
+                            <td>
+                                Charge* <br><span class="note">e.g. 2, -0.1</span>
+                            </td>
+                            <td>
+                                <input type="text" id="met_charge" size="4" maxlength="4"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                VDW radius* <br><span class="note">e.g. 2.10 <br>(Angstrom)</span>
+                            </td>
+                            <td>
+                                <input type="text" id="met_rvdw" size="6" maxlength="6"/>
+                            </td>
+                            <td>
+                                Epsilon* <br><span class="note">e.g. 0.0279 <br>(kcal/mol)</span>
+                            </td>
+                            <td>
+                                <input type="text" id="met_eps" size="6" maxlength="6"/>
+                            </td>
+                            <td>
+                        </tr>
+                    </table>
+                    <br />
+                    <center><input type="button" value="Build metal" onClick="defineMetal();"/>
+                </div>
+                <br />
+                <span class="note">*Required</span>
+            </fieldset>
+        </form>
+        <div id="data">
+            <form id="form_check" action="${h.url_for(action='submit_prepi')}" method="post"  enctype="multipart/form-data" >
+                <fieldset>
+                    <legend>Internal coordinates</legend>
+                    <span class="note">Shortcut: after any field modification, <b>press ENTER key</b> to update data and 3D representation.</span>
+                    <br />
+                    <div id="info_prepi"></div>
+                    <table>
+                        <tr>
+                            <td>
+                                <table id="my-data">
+                                    <thead>
+                                    <tr>
+                                        <th><center>A1</center></th>
+                                        <th><center>A2</center></th>
+                                        <th><center>A3</center></th>
+                                        <th><center>A4</center></th>
+                                        <th><center>Bond</center></th>
+                                        <th><center>Angle</center></th>
+                                        <th><center>Dih</center></th>
+                                        <th><center>Charge</center></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <div id="form_submit_prepi"></div>
+                </fieldset>
+            </form>
+            <form id="form_check" action="${h.url_for(action='create_par')}" method="post"  enctype="multipart/form-data" >
+                <fieldset>
+                    <legend>Create Paramaters and retrieve ff</legend>
+                    <input id="subdata2" type="submit" name="submitData" value="Download ZIP" disabled>
+                </fieldset>
+            </form>
+        </div>
+
+
+
+    </div>
+</div>
+
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+<!-- Morris Charts JavaScript -->
+<script src="../vendor/raphael/raphael.min.js"></script>
+<script src="../vendor/morrisjs/morris.min.js"></script>
+<!--<script src="../data/morris-data.js"></script>-->
+<script src="../../js/dashboard.js"></script>
+<script src="../../js/antechamber.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>
