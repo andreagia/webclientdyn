@@ -11,6 +11,8 @@
       http://www.springframework.org/schema/context
 	  http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
+	<context:property-placeholder location="/resources/application.properties"/>
+
 	<sec:http entry-point-ref="customEntryPoint" use-expressions="true" >
 
 		<sec:custom-filter ref="authenticationFilter"
@@ -31,7 +33,7 @@
 	<sec:authentication-manager alias="authenticationManager">
 		<authentication-provider>
 			<user-service>
-				<user name="mds2" password="test" authorities="ROLE_VERIFIED"/>
+				<user name="mds2" password="${login.token}" authorities="ROLE_VERIFIED"/>
 			</user-service>
 
 		</authentication-provider>
