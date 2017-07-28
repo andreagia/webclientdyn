@@ -22,7 +22,7 @@ public class CustomSuccessHandler extends SavedRequestAwareAuthenticationSuccess
 		{
 				System.out.println("authentication successful!");
 
-			redirectStrategy.sendRedirect(request, response, "html/index.html");
+			redirectStrategy.sendRedirect(request, response, "html/adm/pages/morris.html");
 
 			}
 	public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
