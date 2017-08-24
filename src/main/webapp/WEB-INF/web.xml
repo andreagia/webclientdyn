@@ -7,8 +7,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/spring/root-context.xml
-			/WEB-INF/spring/security/security-config.xml
+			/WEB-INF/spring/appServlet/security-config.xml
 		</param-value>
 
 	</context-param>
@@ -37,7 +36,12 @@
 			<param-value>/WEB-INF/spring/appServlet/dispatcher-servlet.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+
 	</servlet>
+    <servlet-mapping>
+        <servlet-name>appServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>elfinder</servlet-name>
@@ -52,10 +56,5 @@
         <servlet-name>elfinder</servlet-name>
         <url-pattern>/elfinder-servlet/*</url-pattern>
     </servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
 
 </web-app>

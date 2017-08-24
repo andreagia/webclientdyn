@@ -20,8 +20,9 @@
 		<sec:form-login login-page='/login'/>
 		<sec:intercept-url pattern="/login*" access="permitAll" />
 		<sec:intercept-url pattern="/resget" access="permitAll" />
-		<!--<sec:intercept-url pattern="/html/**" access="permitAll" />-->
-		<sec:intercept-url pattern="/**" access="isAuthenticated()" />
+		<sec:intercept-url pattern="/html/adm/data" access="permitAll" />
+		<sec:intercept-url pattern="/html/adm/data" access="permitAll" />
+		<!--<sec:intercept-url pattern="/**" access="isAuthenticated()" />-->
 
 		<sec:logout delete-cookies="JSESSIONID" />
 

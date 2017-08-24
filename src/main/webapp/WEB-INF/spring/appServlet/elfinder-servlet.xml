@@ -18,7 +18,7 @@
 	<bean id="commandExecutorFactory"
 		class="org.cirmmp.webclientdyn.elfinder.controller.executor.DefaultCommandExecutorFactory">
 		<property name="classNamePattern"
-			value="org.cirmmp.elfinder.controller.executors.%sCommandExecutor" />
+			value="org.cirmmp.webclientdyn.elfinder.controller.executors.%sCommandExecutor" />
 		<property name="fallbackCommand">
 			<bean
 				class="org.cirmmp.webclientdyn.elfinder.controller.executors.MissingCommandExecutor" />

@@ -203,6 +203,38 @@
 			<version>1.2</version>
 		</dependency>
 
+        <!-- webjars-->
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>elfinder</artifactId>
+            <version>2.1.20</version>
+            <exclusions>
+                <!-- The exclusions are because the bower versions don't have concat/min versions -->
+                <exclusion>
+                    <artifactId>jquery-ui</artifactId>
+                    <groupId>org.webjars.bower</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jquery</artifactId>
+                    <groupId>org.webjars.bower</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>1.12.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-ui</artifactId>
+            <version>1.11.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-ui-themes</artifactId>
+            <version>1.11.4</version>
+        </dependency>
 	<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -213,6 +245,15 @@
 	</dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.3.18.v20170406</version>
+                <configuration>
+                    <jettyXml>jetty.xml,jetty-http.xml,jetty-ssl.xml,jetty-https.xml</jettyXml>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <version>2.9</version>
