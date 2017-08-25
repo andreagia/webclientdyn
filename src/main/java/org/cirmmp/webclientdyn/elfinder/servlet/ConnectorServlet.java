@@ -34,7 +34,7 @@ public class ConnectorServlet extends HttpServlet
 	{
 		DefaultCommandExecutorFactory defaultCommandExecutorFactory = new DefaultCommandExecutorFactory();
 		defaultCommandExecutorFactory
-				.setClassNamePattern("org.cirmmp.elfinder.controller.executors.%sCommandExecutor");
+				.setClassNamePattern("org.cirmmp.webclientdyn.elfinder.controller.executors.%sCommandExecutor");
 		defaultCommandExecutorFactory
 				.setFallbackCommand(new MissingCommandExecutor());
 		return defaultCommandExecutorFactory;

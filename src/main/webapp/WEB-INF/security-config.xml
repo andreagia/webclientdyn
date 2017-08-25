@@ -19,14 +19,15 @@
 			before="PRE_AUTH_FILTER" />
 		<sec:form-login login-page='/login'/>
 		<sec:intercept-url pattern="/login*" access="permitAll" />
-		<sec:intercept-url pattern="/resget" access="permitAll" />
+		<!--<sec:intercept-url pattern="/resget" access="permitAll" />
 		<sec:intercept-url pattern="/html/adm/data" access="permitAll" />
 		<sec:intercept-url pattern="/html/adm/data" access="permitAll" />
-		<!--<sec:intercept-url pattern="/**" access="isAuthenticated()" />-->
+		<sec:intercept-url pattern="/html/bower_components/jquery/src/css" access="permitAll" />-->
+		<sec:intercept-url pattern="/**" access="isAuthenticated()" />
 
 		<sec:logout delete-cookies="JSESSIONID" />
 
-		<!--<sec:csrf disabled="true" />-->
+		<sec:csrf disabled="true" />
 	</sec:http>
 
 	<context:component-scan base-package="org.cirmmp.webclientdyn.authentication" />
