@@ -24,9 +24,7 @@
 		<sec:intercept-url pattern="/html/adm/data" access="permitAll" />
 		<sec:intercept-url pattern="/html/bower_components/jquery/src/css" access="permitAll" />-->
 		<sec:intercept-url pattern="/**" access="isAuthenticated()" />
-
 		<sec:logout delete-cookies="JSESSIONID" />
-
 		<sec:csrf disabled="true" />
 	</sec:http>
 
