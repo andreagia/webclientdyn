@@ -89,7 +89,8 @@ public class Access  {
         logger.info(formS2.getFileNC());
         logger.info(formS2.getFilePDB());
         logger.info("----RISULTATI--------");
-        String fullPath = context.getRealPath("/WEB-INF/classes/script/create_bv_inpt.py");
+        String fullPath = context.getRealPath("/resources/script/create_bv_inpt.py");
+        logger.info("PATH PYTHON " + fullPath);
         String dataPath = context.getRealPath("/html/tmp");
         String path = fullPath.substring(0, fullPath.lastIndexOf("/")+1);
         String webinf = fullPath.substring(0, fullPath.lastIndexOf("WEB-INF")+7);
@@ -137,7 +138,8 @@ public class Access  {
             }
         });
 
-        logger.info("----CHECKONEDATADIR------");
+        logger.info("----CHECK ONEDATA DIR------");
+        logger.info(inDir);
         logger.info(directories[0].toString());
         logger.info(String.valueOf(directories.length));
 
@@ -214,8 +216,13 @@ public class Access  {
         FileS2 s2 = new FileS2();
 
         try {
-            FileReader filein = new FileReader(webinf+"/ired_res.json");
-            s2 = gson.fromJson(filein, FileS2.class);
+            File f = new File(webinf+"/ired_res.json");
+            if(f.exists()){
+                FileReader filein = new FileReader(webinf+"/ired_res.json");
+                s2 = gson.fromJson(filein, FileS2.class);
+            }else {
+                logger.info("ired_res.json NOT YET CREATED");
+            }
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } catch (IOException ex2) {

@@ -50,5 +50,4 @@
 	<beans:bean id="customSuccessHandler"
 		class="org.cirmmp.webclientdyn.authentication.CustomSuccessHandler" />
 
-
 </beans:beans>

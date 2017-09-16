@@ -14,7 +14,6 @@ import java.io.IOException;
 
 public class CustomSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler
 {
-
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
 		@Override
