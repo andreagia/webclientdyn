@@ -56,4 +56,19 @@
         <url-pattern>/elfinder-servlet/*</url-pattern>
     </servlet-mapping>
 
+	<servlet>
+		<servlet-name>appServletTL</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/dispatcherTL-servlet.xml</param-value>
+		</init-param>
+
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>appServletTL</servlet-name>
+		<url-pattern>/tl/*</url-pattern>
+	</servlet-mapping>
+
+
 </web-app>

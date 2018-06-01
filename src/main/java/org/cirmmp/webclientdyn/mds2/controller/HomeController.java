@@ -1,4 +1,4 @@
-package org.cirmmp.webclientdyn;
+package org.cirmmp.webclientdyn.mds2.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -35,5 +35,10 @@ public class HomeController {
 		
 		return "home";
 	}
-	
+
+	@RequestMapping(value = "/index")
+	public String index() {
+		return "index.html";
+	}
+
 }
