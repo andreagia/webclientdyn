@@ -20,7 +20,8 @@
 
     <!--<mvc:resources mapping="/**" location="/WEB-INF/views/" />-->
 
-    <context:component-scan base-package="org.cirmmp.webclientdyn.mds2" />
+    <context:component-scan base-package="org.cirmmp.webclientdyn.mds2, org.cirmmp.webclientdyn.rfm " />
+
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
@@ -64,13 +65,13 @@
     <bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
 
 
-    <bean id="multipartResolver"
+  <!--  <bean id="multipartResolver"
                 class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 
-        <!-- setting maximum upload size -->
-        <property name="maxUploadSize" value="1000000" />
+        &lt;!&ndash; setting maximum upload size &ndash;&gt;
+        <property name="maxUploadSize" value="10000000" />
 
-    </bean>
+    </bean>-->
 
 
 </beans>

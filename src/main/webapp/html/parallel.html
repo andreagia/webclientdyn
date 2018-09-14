@@ -7,25 +7,89 @@
 </head>
 <body>
 <script>
+
+
+
+    //Guardare qui https://jsfiddle.net/potatosalad/FbaM6/
+
+
+    var outputblob;
     var blob, stage;
     function load( o ){
-        stage.loadFile( blob, { ext: "mmtf", defaultRepresentation: true } );
+        stage.loadFile( blob, { ext: "pdb", defaultRepresentation: true } );
     }
-    var url = "http://mmtf.rcsb.org/v1.0/full/3sn6";
+    var url = "https://files.rcsb.org/download/1AQA.pdb";
     var xhr = new XMLHttpRequest();
     xhr.open( "GET", url, true );
     xhr.addEventListener( 'load', function( event ){
-        blob = new Blob( [ xhr.response ], { type: 'application/octet-binary'} );
-        if( stage ) load();
+        blob = new Blob( [ xhr.response ], { type: 'text/html'} );
+
+        if( stage ){
+            console.log('sono qui');
+
+            var blobtest = {
+                data: null
+            };
+
+            blobtest.blob2string = function(blob) {
+
+                var fileReader = new FileReader();
+                fileReader.onload = function(event) {
+                    var buffer = event.target.result;
+                    var chars  = new Uint16Array(buffer);
+                    this.data   = String.fromCharCode.apply(null, chars);
+                };
+                console.log(blob);
+                fileReader.readAsArrayBuffer(blob);
+
+                return true;
+            };
+
+            blobtest.blob2string(blob);
+            console.log(blobtest.data);
+
+
+            var arrayBuffer;
+            var fileReader = new FileReader();
+            fileReader.onload = function() {
+                arrayBuffer = this.result;
+            };
+            fileReader.readAsArrayBuffer(blob);
+            console.log(fileReader.result);
+
+
+            var reader = new FileReader();
+            reader.onload = function() {
+                outputblob=reader.result;
+                console.log(outputblob);
+                alert(reader.result);
+
+            };
+
+            reader.readAsText(blob);
+            console.log(outputblob);
+            var base64Image = new Buffer( blob, 'text' ).toString();
+            console.log("nuovo");
+            console.log(base64Image);
+
+            load();
+        }
     } );
     xhr.responseType = "arraybuffer";
     xhr.send( null );
+
 </script>
-<script src="/html/js/ngl/ngl.js"></script>
+<script src="js/ngl/ngl.js"></script>
 <script>
     document.addEventListener( "DOMContentLoaded", function(){
         stage = new NGL.Stage( "viewport" );
-        if( blob ) load();
+        // if( blob ) {
+        //     console.log('sono qui');
+        //     load();
+        //     var out =blobToString(blob);
+        //     console.log(out);
+        //}
+
     } );
 </script>
 <div id="viewport" style="width:800px; height:800px;"></div>
