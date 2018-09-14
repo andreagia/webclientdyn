@@ -1,73 +1,59 @@
-'use strict';
+import React, {Component} from 'react';
+import './App.css';
+import Ngltag from './pdb/Ngltag';
+import Vistextpdb from './pdb/Vistextpdb';
+import ImportFromFileBodyComponent from './pdb/ImportFromFileBodyComponent';
+import VirtualFolder from './pdb/VirtualFolder';
 
-// tag::vars[]
-const React = require('react');
-const ReactDOM = require('react-dom');
-const client = require('./client');
-// end::vars[]
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            file: null
 
-// tag::app[]
-class App extends React.Component {
+        }
+        this.onUpdate=this.onUpdate.bind(this);
+    }
 
-	constructor(props) {
-		super(props);
-		this.state = {employees: []};
-	}
 
-	componentDidMount() {
-		client({method: 'GET', path: '/api/employees'}).done(response => {
-			this.setState({employees: response.entity._embedded.employees});
-		});
-	}
+    onUpdate(val){
+        this.setState({
+            file: val
+        })
+    };
 
-	render() {
-		return (
-			<EmployeeList employees={this.state.employees}/>
-		)
-	}
+    render() {
+        let listpdb = '';
+        console.log("FILE ->>")
+        console.log(this.state.file)
+        if(this.state.file){
+            listpdb =(
+            <div>
+                {this.state.file}
+            </div>
+            );
+        }
+        return (
+
+            <div className="App">
+                <header className="App-header">
+                    <h1 className="App-title">Welcome to React</h1>
+                </header>
+
+                <Vistextpdb/>
+                <p className="App-intro">
+                    To get started, edit <code>src/App.js</code> and save to reload.
+                </p>
+                <Ngltag  pdbfiletxt={this.state.file}/>
+
+                <ImportFromFileBodyComponent onUpdate={this.onUpdate}/>
+                {listpdb}
+
+                <VirtualFolder/>
+
+            </div>
+        );
+    }
 }
-// end::app[]
 
-// tag::employee-list[]
-class EmployeeList extends React.Component{
-	render() {
-		var employees = this.props.employees.map(employee =>
-			<Employee key={employee._links.self.href} employee={employee}/>
-		);
-		return (
-			<table>
-				<tbody>
-					<tr>
-						<th>First Name</th>
-						<th>Last Name</th>
-						<th>Description</th>
-					</tr>
-					{employees}
-				</tbody>
-			</table>
-		)
-	}
-}
-// end::employee-list[]
-
-// tag::employee[]
-class Employee extends React.Component{
-	render() {
-		return (
-			<tr>
-				<td>{this.props.employee.firstName}</td>
-				<td>{this.props.employee.lastName}</td>
-				<td>{this.props.employee.description}</td>
-			</tr>
-		)
-	}
-}
-// end::employee[]
-
-// tag::render[]
-ReactDOM.render(
-	<App />,
-	document.getElementById('react')
-)
-// end::render[]
-
+export default App;
