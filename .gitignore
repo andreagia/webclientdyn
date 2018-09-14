@@ -5,3 +5,4 @@ target
 /node_modules/*
 /node_modules/
 /src/main/webapp/html/RichFilemanager/node_modules/
+/src/main/webapp/html/RichFilemanager/package-lock.json
