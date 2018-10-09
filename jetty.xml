@@ -24,4 +24,15 @@
       </Call>
 
     -->
+
+    <!--<filter>
+        <filter-name>HeaderFilter</filter-name>
+        <filter-class>org.eclipse.jetty.servlets.HeaderFilter</filter-class>
+        <init-param>
+            <param-name>headerConfig</param-name>
+            <param-value>
+                set X-Frame-Options: sameorigin
+            </param-value>
+        </init-param>
+    </filter>-->
 </Configure>

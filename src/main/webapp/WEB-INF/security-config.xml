@@ -27,6 +27,16 @@
 		<!--<sec:intercept-url pattern="/**" access="isAuthenticated()" />-->
 		<sec:logout delete-cookies="JSESSIONID" />
 		<sec:csrf disabled="true" />
+<!-- to anable iframe on richfilemanager-->
+		<sec:headers>
+			<sec:frame-options disabled="true"></sec:frame-options>
+		</sec:headers>
+		<!--<sec:headers>-->
+			<!--<sec:frame-options disabled="true"/>-->
+			<!--<sec:xss-protection block="false"/>-->
+			<!--<sec:hsts disabled="true"/>-->
+			<!--<sec:content-type-options disabled="true"/>-->
+		<!--</sec:headers>-->
 	</sec:http>
 
 	<context:component-scan base-package="org.cirmmp.webclientdyn.authentication" />

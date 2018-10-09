@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="../js/ckeditor/ckeditor.js"></script>
+    <style type="text/css">
+        .fm-modal {
+            z-index: 10011; /** Because CKEditor image dialog was at 10010 */
+            width:80%;
+            height:80%;
+            top: 10%;
+            left:10%;
+            border:0;
+            position:fixed;
+            -moz-box-shadow: 0px 1px 5px 0px #656565;
+            -webkit-box-shadow: 0px 1px 5px 0px #656565;
+            -o-box-shadow: 0px 1px 5px 0px #656565;
+            box-shadow: 0px 1px 5px 0px #656565;
+            filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=180, Strength=5);
+        }
+    </style>
+
+
+</head>
+<body>
+<script type="text/javascript">
+    // File Picker modification for FCK Editor v2.0 - www.fckeditor.net
+    // by: Pete Forde <pete@unspace.ca> @ Unspace Interactive
+    var urlobj;
+    var oWindow;
+
+    function BrowseServer(obj)
+    {
+        urlobj = obj;
+        OpenServerBrowser(
+            'index.html',
+            screen.width * 0.7,
+            screen.height * 0.7 ) ;
+    }
+
+    function OpenServerBrowser( url, width, height )
+    {
+        var iLeft = (screen.width - width) / 2 ;
+        var iTop = (screen.height - height) / 2 ;
+        var sOptions = "toolbar=no,status=no,resizable=yes,dependent=yes" ;
+        sOptions += ",width=" + width ;
+        sOptions += ",height=" + height ;
+        sOptions += ",left=" + iLeft ;
+        sOptions += ",top=" + iTop ;
+        oWindow = window.open( url, "iframe", sOptions ) ;
+        $("#dialog").append($("<iframe></iframe>").attr("src", "index.html"));
+    }
+
+    function SetUrl( url, width, height, alt )
+    {
+        document.getElementById(urlobj).value = url ;
+        oWindow.close();
+    }
+</script>
+
+<button type="button" onclick="BrowseServer('id_of_the_target_input');">Pick Image</button>
+<input type="text" id="id_of_the_target_input"/>
+
+<iframe src="about:blank" name="iframe"></iframe>
+
+<a href="http://localhost:8080/html/RichFilemanager/index.html" target="IFrame">Link Text</a>
+<iframe src="about:blank" name="IFrame"></iframe>
+
+<dialog></dialog>
+
+<div>
+		<textarea cols="80" id="editor1" name="editor1" rows="10">
+		</textarea>
+</div>
+
+<script>
+    CKEDITOR.replace('editor1');
+
+
+    CKEDITOR.on('dialogDefinition', function (event)
+    {
+        var editor = event.editor;
+        var dialogDefinition = event.data.definition;
+        var dialogName = event.data.name;
+
+        var cleanUpFuncRef = CKEDITOR.tools.addFunction(function ()
+        {
+            // Do the clean-up of filemanager here (called when an image was selected or cancel was clicked)
+            $('#fm-iframe').remove();
+            $("body").css("overflow-y", "scroll");
+        });
+
+        var tabCount = dialogDefinition.contents.length;
+        console.log("Controllo se entra qui");
+        console.log(dialogDefinition);
+        for (var i = 0; i < tabCount; i++) {
+            var dialogTab = dialogDefinition.contents[i];
+            if (!(dialogTab && typeof dialogTab.get === 'function')) {
+                continue;
+            }
+
+            var browseButton = dialogTab.get('browse');
+
+            if (browseButton !== null) {
+                browseButton.hidden = false;
+                browseButton.onClick = function (dialog, i) {
+                    editor._.filebrowserSe = this;
+                    var iframe = $("<iframe id='fm-iframe' class='fm-modal'/>").attr({
+                        src: './index.html' + // Change it to wherever  Filemanager is stored.
+                            '?CKEditorFuncNum=' + CKEDITOR.instances[event.editor.name]._.filebrowserFn +
+                            '&CKEditorCleanUpFuncNum=' + cleanUpFuncRef +
+                            '&langCode=en' +
+                            '&CKEditor=' + event.editor.name
+                    });
+
+                    $("body").append(iframe);
+                    $("body").css("overflow-y", "hidden");  // Get rid of possible scrollbars in containing document
+                }
+            }
+        }
+    }); // dialogDefinition
+</script>
+
+</body>
+</html>

@@ -3946,6 +3946,8 @@ $.richFilemanagerPlugin = function(element, pluginOptions)
 			}
 		}
 
+
+
 		// define context window if any
         if (window.opener) {
             contextWindow = window.opener;
