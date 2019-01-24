@@ -1,6 +1,4 @@
 package org.cirmmp.webclientdyn.mds2.controller;
-
-
 import com.google.gson.Gson;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.cirmmp.webclientdyn.mds2.chart.FileS2;
@@ -24,7 +22,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-
 
 @Controller
 @RequestMapping("/service")

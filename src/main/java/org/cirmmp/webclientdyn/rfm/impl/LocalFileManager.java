@@ -1,6 +1,5 @@
 package org.cirmmp.webclientdyn.rfm.impl;
 
-
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.cirmmp.webclientdyn.rfm.AbstractFileManager;
 import org.cirmmp.webclientdyn.rfm.MultipartFileSender;
@@ -13,9 +12,11 @@ import org.cirmmp.webclientdyn.rfm.model.FileType;
 import org.cirmmp.webclientdyn.rfm.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,8 +34,9 @@ import java.util.zip.ZipInputStream;
 
 import static org.cirmmp.webclientdyn.rfm.util.FileUtils.getExtension;
 
-public class LocalFileManager extends AbstractFileManager {
 
+
+public class LocalFileManager extends AbstractFileManager {
 
 
     private static final Logger logger = LoggerFactory.getLogger(LocalFileManager.class);
@@ -47,6 +49,9 @@ public class LocalFileManager extends AbstractFileManager {
     public LocalFileManager(Map<String, String> options) throws FMInitializationException {
         super(options);
 
+        String workingDir = System.getProperty("user.dir");
+        logger.info("<---- Returning Path -----> ");
+        logger.info(workingDir);
         String fileRoot = propertiesConfig.getProperty("fileRoot", "");
 
         if (!fileRoot.isEmpty() && fileRoot.endsWith("/")) {
