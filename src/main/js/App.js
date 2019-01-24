@@ -4,6 +4,7 @@ import Ngltag from './pdb/Ngltag';
 import Vistextpdb from './pdb/Vistextpdb';
 import ImportFromFileBodyComponent from './pdb/ImportFromFileBodyComponent';
 import VirtualFolder from './pdb/VirtualFolder';
+import RichFMPick from './pdb/RichFMPick';
 
 class App extends Component {
     constructor(props) {
@@ -11,10 +12,9 @@ class App extends Component {
         this.state = {
             file: null
 
-        }
+        };
         this.onUpdate=this.onUpdate.bind(this);
     }
-
 
     onUpdate(val){
         this.setState({
@@ -24,8 +24,8 @@ class App extends Component {
 
     render() {
         let listpdb = '';
-        console.log("FILE ->>")
-        console.log(this.state.file)
+        console.log("FILE ->>");
+        console.log(this.state.file);
         if(this.state.file){
             listpdb =(
             <div>
@@ -51,6 +51,7 @@ class App extends Component {
 
                 <VirtualFolder/>
 
+                <RichFMPick/>
             </div>
         );
     }

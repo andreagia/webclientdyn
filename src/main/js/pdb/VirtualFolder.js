@@ -11,7 +11,7 @@ class VirtualFolder extends Component {
 
         window.addEventListener("message", receiveMessage, false);
         let _this = this;
-        $('button').on('click',function () {
+        $('#buttonvf').on('click',function () {
             _this.setState({store: Math.random()});
 
             let popup = window.open('https://portal.west-life.eu/virtualfolder/filepickercomponent.html', '_blank', 'width=640, height=480');
@@ -38,7 +38,7 @@ class VirtualFolder extends Component {
         return (
             <div>
 
-                <button>Upload with Virtual folder</button>
+                <button id="buttonvf">Upload with Virtual folder</button>
                 <p>File URL:<a id="file" href={this.state.vlink}>{this.state.vlink}</a></p>
             </div>
         )

@@ -3946,8 +3946,6 @@ $.richFilemanagerPlugin = function(element, pluginOptions)
 			}
 		}
 
-
-
 		// define context window if any
         if (window.opener) {
             contextWindow = window.opener;
@@ -4022,6 +4020,12 @@ $.richFilemanagerPlugin = function(element, pluginOptions)
                         if(sourceNode.rdo.type === 'file') {
                             var parentNode = sourceNode.parentNode();
                             var newNode = fmModel.treeModel.createNode(dataObject);
+
+                            /** See if the new name OVERWROTE an existing file.  If so, remove the original **/
+                            var oldNode = fmModel.treeModel.findByParam('id', dataObject.id);
+                            if(oldNode) {
+                                oldNode.remove();
+                            }
                             sourceNode.remove();
 
                             if(parentNode) {
@@ -4039,6 +4043,13 @@ $.richFilemanagerPlugin = function(element, pluginOptions)
                         var sourceItem = fmModel.itemsModel.findByParam('id', oldPath);
                         if(sourceItem) {
                             sourceItem.remove();
+
+                            /** See if the new name OVERWROTE an existing file.  If so, remove the original **/
+                            var oldItem = fmModel.itemsModel.findByParam('id', dataObject.id);
+                            if(oldItem) {
+                                oldItem.remove();
+                            }
+
                             var newItem = fmModel.itemsModel.createItem(dataObject);
                             fmModel.itemsModel.appendItems(newItem);
 						}

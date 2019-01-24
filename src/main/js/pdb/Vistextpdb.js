@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Vistextpdb =(props) => {
+const Vistextpdb = (props) => {
     return (
         <div>
             <h1> CIAO sono visttext</h1>

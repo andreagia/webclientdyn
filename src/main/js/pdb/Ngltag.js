@@ -12,7 +12,7 @@ class Ngltag extends Component {
     componentDidMount() {
 
         let _this = this;
-        $('button').on('click',function () {
+        $('#buttonvf').on('click',function () {
             _this.setState({store: Math.random()})
             alert("PIPPO");
         });
@@ -49,7 +49,7 @@ class Ngltag extends Component {
             <div>
 
                 <h2>Viewport</h2>
-                <div id="viewport" style={{width:'800px', height:'800px'}}></div>
+                <div id="viewport" style={{width:'400px', height:'400px'}}></div>
 
                 <button>click</button>
                 <h2>{this.state.store}</h2>
