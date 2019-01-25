@@ -17,13 +17,16 @@ class Richfmpick extends Component {
         window.addEventListener("message", receiveMessagerf, false);
          function receiveMessagerf(event)
          {
-             console.log('Sono in richfiles');
-            console.log(typeof event.data);
-             console.log(event.data);
-             console.log(event.origin);
-             if($('#iframe').length) {
-                 console.log("PIPPO");
-                 $('#iframe').remove();
+             if(event.data.source==="richfilemanager") {
+                 console.log('Sono in richfiles');
+                 console.log(typeof event.data);
+                 console.log(event.data);
+                 console.log(event.origin);
+                 // if($('#iframe').length && event.origin.include("hostname"))
+                 if ($('#iframe').length) {
+                     console.log("PIPPO");
+                     $('#iframe').remove();
+                 }
              }
          }
             $('#buttonrf').click(function(){
@@ -37,7 +40,7 @@ class Richfmpick extends Component {
     render() {
         return (
             <div>
-                <input name="multi_url" type="text" id="multi_url" maxLength="255" value="" />
+                <input name="multi_url" type="text" id="multi_url" maxLength="255" />
                 <button id="buttonrf">Button</button>
                 <div id="iframeHolder"></div>
             </div>

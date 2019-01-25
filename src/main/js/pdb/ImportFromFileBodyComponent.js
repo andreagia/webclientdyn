@@ -13,7 +13,7 @@ class ImportFromFileBodyComponent extends Component {
     }
     handleFileRead(e) {
         const content = this.fileReader.result;
-        console.log(content);
+      //  console.log(content);
         this.props.onUpdate(content);
         this.setState({file: content});
     };
@@ -28,12 +28,13 @@ class ImportFromFileBodyComponent extends Component {
             <div>
                 <input type='file'
                        id='file'
+                       value=''
                        className='input-file'
                        onChange={e => this.handleFileChose(e.target.files[0])}
                 />
             </div>
         )
     }
-};
+}
 
 export default ImportFromFileBodyComponent;
