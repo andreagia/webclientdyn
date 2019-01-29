@@ -80,7 +80,7 @@
     "video": ["ogv", "avi", "mkv", "mp4", "webm", "m4v"]
   },
   "search": {
-    "enabled": true,
+    "enabled": false,
     "recursive": false,
     "caseSensitive": false,
     "typingDelay": 500
@@ -103,7 +103,7 @@
       ]
     },
     "video": {
-      "enabled": true,
+      "enabled": false,
       "extensions": [
         "ogv",
         "mp4",
@@ -114,7 +114,7 @@
       "playerHeight": 222
     },
     "audio": {
-      "enabled": true,
+      "enabled": false,
       "extensions": [
         "ogg",
         "mp3",
@@ -131,7 +131,7 @@
       "readerHeight": "600"
     },
     "opendoc": {
-      "enabled": true,
+      "enabled": false,
       "extensions": [
         "pdf",
         "odt",
@@ -142,7 +142,7 @@
       "readerHeight": "480"
     },
     "google": {
-      "enabled": true,
+      "enabled": false,
       "extensions": [
         "doc",
         "docx",
@@ -169,7 +169,7 @@
     }
   },
   "editor": {
-    "enabled": true,
+    "enabled": false,
     "theme": "default",
     "lineNumbers": true,
     "lineWrapping": true,

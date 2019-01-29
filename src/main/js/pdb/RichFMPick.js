@@ -8,11 +8,6 @@ window.$ = window.jQuery = jQuery;
 // esempio preso http://demos.jquerymobile.com/1.4.5/popup-iframe/
 
 class Richfmpick extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-
 
     componentDidMount() {
 

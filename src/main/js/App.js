@@ -10,8 +10,6 @@ class App extends Component {
             file: null
         };
 
-
-
     onUpdate = (val) => {
         this.setState({
             file: val
@@ -34,7 +32,7 @@ class App extends Component {
         return (
             <div className="App">
                 <ImportFromFileBodyComponent onUpdate={this.onUpdate} />
-                <Ngltag  pdbfiletxt={this.state.file} passo={passo} />
+                <Ngltag  pdbfiletxt={this.state.file} />
                 {/*<VirtualFolder/>*/}
                 <RichFMPick/>
                 {listpdb}

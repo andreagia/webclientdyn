@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import $ from 'jquery';
 
 class VirtualFolder extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {vlink : null};
-    }
+   state = {vlink : null};
+
 
     componentDidMount() {
 
@@ -34,7 +32,6 @@ class VirtualFolder extends Component {
     }
 
     render(){
-
         return (
             <div>
 

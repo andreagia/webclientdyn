@@ -2,11 +2,9 @@ import React, {Component} from 'react';
 import * as NGL from 'ngl';
 
 class Ngltag extends Component {
-    constructor(props) {
-        super(props);
-        this.stage =null;
+  stage =null;
      //   this.state = {store : ""};
-    }
+
 
     componentDidMount() {
         this.stage = new NGL.Stage("viewport");
@@ -15,7 +13,7 @@ class Ngltag extends Component {
 
     render(){
         console.log("<---------------NGLTAG--------------------->");
-        console.log(this.props.passo);
+//        console.log(this.props.passo);
 
         if (this.stage) {
             if (this.props.pdbfiletxt) {
