@@ -6,15 +6,13 @@ import VirtualFolder from './pdb/VirtualFolder';
 import RichFMPick from './pdb/RichFMPick';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+    state = {
             file: null
         };
-        this.onUpdate=this.onUpdate.bind(this);
-    }
 
-    onUpdate(val){
+
+
+    onUpdate = (val) => {
         this.setState({
             file: val
         })

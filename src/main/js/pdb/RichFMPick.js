@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import jQuery from 'jquery';
 window.$ = window.jQuery = jQuery;
-require('jquery-mobile');
+//require('jquery-mobile');
 //window.jQuery = jQuery;
 //require('jquery-colorbox');
 
@@ -11,6 +11,8 @@ class Richfmpick extends Component {
     constructor(props) {
         super(props);
     }
+
+
 
     componentDidMount() {
 
@@ -31,7 +33,7 @@ class Richfmpick extends Component {
          }
             $('#buttonrf').click(function(){
                 if(!$('#iframe').length) {
-                    $('#iframeHolder').html('<iframe id="iframe" src="RichFilemanager/index.html?field_name=multi_url" width="700" height="450"></iframe>');
+                    $('#iframeHolder').html('<iframe id="iframe" src="RichFilemanager/index.html?config=user.config.json&field_name=multi_url" width="700" height="450"></iframe>');
                 }
             });
     }

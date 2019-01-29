@@ -11,15 +11,12 @@ module.exports = {
         filename: 'bundle.js'
     },
     module: {
-        loaders: [
+        rules: [
             {
-                test:  /\.js$/,
+                test:  /\.js|jsx$/,
                 exclude: /(node_modules)/,
-                loader: 'babel',
-                query: {
-                    cacheDirectory: true,
-                    presets: ['es2015', 'react']
-                }
+                use: ['babel-loader'],
+
             }, {
                 test: /\.css$/,
                 loader: combineLoaders([

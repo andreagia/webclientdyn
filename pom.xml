@@ -326,11 +326,13 @@
 							<goal>install-node-and-npm</goal>
 						</goals>
 						<configuration>
-							<nodeVersion>v4.4.5</nodeVersion>
-							<npmVersion>3.9.2</npmVersion>
+							<nodeVersion>v11.6.0</nodeVersion>
+							<npmVersion>6.7.0</npmVersion>
+							<!--<nodeVersion>v4.4.5</nodeVersion>
+							<npmVersion>3.9.2</npmVersion>-->
 						</configuration>
 					</execution>
-					<!--<execution>
+					<execution>
 						<id>npm install</id>
 						<goals>
 							<goal>npm</goal>
@@ -338,7 +340,7 @@
 						<configuration>
 							<arguments>install</arguments>
 						</configuration>
-					</execution>-->
+					</execution>
 					<execution>
 						<id>webpack build</id>
 						<goals>
