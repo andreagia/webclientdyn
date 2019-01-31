@@ -1,4 +1,6 @@
+
 //var path = require('path');
+// https://github.com/rwieruch/minimal-react-webpack-babel-setup
 var webpack = require('webpack');
 var combineLoaders = require('webpack-combine-loaders');
 //const WorkboxPlugin = require('workbox-webpack-plugin');

@@ -17,7 +17,9 @@ class Ngltag extends Component {
 
         if (this.stage) {
             if (this.props.pdbfiletxt) {
+                console.log("<---------------PASSATO A NGLTAG--------------------->");
                 console.log(this.props.pdbfiletxt);
+                console.log(typeof this.props.pdbfiletxt);
                 let data = this.props.pdbfiletxt;
                 let textpdbArr = data.split("\n");
                 let dataArray = textpdbArr.filter(item => item.match('^ATOM') && !item.includes("WAT"));

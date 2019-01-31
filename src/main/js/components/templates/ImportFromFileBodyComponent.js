@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 
 class ImportFromFileBodyComponent extends Component {
-    fileReader = '';
-
     state = {
         file: null
-
     };
+    fileReader = null;
 
     handleFileRead = (e) =>{
         const content = this.fileReader.result;
@@ -16,6 +14,9 @@ class ImportFromFileBodyComponent extends Component {
     };
 
     handleFileChose = (file) =>{
+        console.log("<------- FILE -------->")
+        console.log(typeof file);
+        console.log(file);
         this.fileReader = new FileReader();
         this.fileReader.onloadend = this.handleFileRead;
         this.fileReader.readAsText(file);

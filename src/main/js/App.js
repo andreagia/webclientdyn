@@ -1,41 +1,20 @@
 import React, {Component} from 'react';
 import './App.css';
-import Ngltag from './pdb/Ngltag';
-import ImportFromFileBodyComponent from './pdb/ImportFromFileBodyComponent';
-import VirtualFolder from './pdb/VirtualFolder';
-import RichFMPick from './pdb/RichFMPick';
+import S2maintrial from './containers/S2maintrial';
+import S2main from "./containers/S2main";
 
 class App extends Component {
     state = {
-            file: null
+
         };
 
-    onUpdate = (val) => {
-        this.setState({
-            file: val
-        })
-    };
 
     render() {
-        let listpdb = '';
-        let passo = "PIPPOPIPPO";
-        //console.log("FILE ->>");
-       // console.log(this.state.file);
-        if(this.state.file){
-            passo="PLUTOPLUTO";
-            listpdb = (
-            <div>
-                {this.state.file}
-            </div>
-            );
-        }
+
         return (
             <div className="App">
-                <ImportFromFileBodyComponent onUpdate={this.onUpdate} />
-                <Ngltag  pdbfiletxt={this.state.file} />
-                {/*<VirtualFolder/>*/}
-                <RichFMPick/>
-                {listpdb}
+                <S2main/>
+                {/*<S2maintrial/>*/}
             </div>
         );
     }
