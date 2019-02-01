@@ -18,6 +18,7 @@ class FMPickpdb extends Component {
         function receiveMessagerfpdb(event)
         {
 
+            let retval = {data: null, filename: null};
             if(event.data.source==="richfilemanager") {
                 console.log("sono in recive message PDB");
                 if ($('#iframepdb').length) {
@@ -29,14 +30,15 @@ class FMPickpdb extends Component {
                 let path = event.data.resourceObject.attributes.path;
                 let pathfile = url.replace("reactjs.html","")+path.replace("src/main/webapp/html/","");
                 // console.log(event.data);
-
+                retval.filename = pathfile;
                 axios
                     .get(
                         pathfile
                     )
                     .then(res => {
                         // return direcltly data objectconst file = res.data;
-                        selfResponce(res);
+                        retval.data = res;
+                        selfResponce(retval);
                     })
                     .catch(error => {
                         console.log((error));

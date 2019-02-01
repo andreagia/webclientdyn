@@ -28,7 +28,9 @@
     "react-dom": "^16.6.0"
   },
   "scripts": {
-    "watch": "webpack --watch -d"
+    "watch": "webpack --watch -d",
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
