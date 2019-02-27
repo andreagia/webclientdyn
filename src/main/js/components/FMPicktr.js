@@ -23,7 +23,7 @@ class FMPicktr extends Component {
                     window.removeEventListener("message", receiveMessagerf, false)
                 }
                 let path = event.data.resourceObject.attributes.path;
-                selfResponce(path.replace("src/main/webapp/html/filemanager", ""));
+                selfResponce(path.replace("src/main/webapp/html/filemanager/", ""));
 
             }
         }

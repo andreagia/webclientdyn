@@ -10,7 +10,7 @@ if [ ! -d $DINPUT ]; then
   mkdir -p $DINPUT;
 fi
 
-export AMBERHOME=/usr/local/amber16
+export AMBERHOME=/usr/local/amber18
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$AMBERHOME/lib
 
 if pgrep -x "ccptraj" > /dev/null
@@ -29,11 +29,10 @@ else
     fi
 
     python $SCRIPT/create_bv_inpt.py -v nh -p $FILEPDB -t $FILENC > $DINPUT/mds2.in
-    $AMBERHOME/bin/cpptraj -i $DINPUT/mds2.in
+    $AMBERHOME/bin/cpptraj -i $DINPUT/mds2.in > $DINPUT/mds2.out 2>&1
     python $SCRIPT/csv2json.py
     cp $FILEPDB $WEBINF/prot.pdb
     cp $DINPUT/tmp/ired_res.json $WEBINF
-
 
 fi
 
