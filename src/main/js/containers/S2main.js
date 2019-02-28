@@ -3,6 +3,8 @@ import FMPicktr from '../components/FMPicktr'
 import FMPickpdb from '../components/FMPickpdb';
 import Checkpdb from '../utils/pdb/Checkpdb'
 import NGLview from "../components/NGLview";
+import Plots2 from "../components/Plots2";
+import Clock from "../components/Clock"
 
 import * as NGL from "ngl";
 import axios from "axios"
@@ -21,8 +23,7 @@ class S2main extends Component {
             upadte: false
         },
         loading: false,
-        submitted: false,
-        txtmds2: null
+        submitted: false
     };
 
     onUpdatertr = (val) => {
@@ -51,19 +52,6 @@ class S2main extends Component {
         )
     };
 
-
-    checksubimt = () => {
-        let viewResults = null;
-
-        console.log("CHECK PREMUTO");
-        axios.get("/react/checkrun").then(result => {
-
-                console.log("RISPOSTA CHECRUN");
-                console.log(result);
-                if(result.data.info === "OK") this.setState({txtmds2: result.data.text})
-            }
-        )
-    };
     render(){
 
         let viewNGL = null;
@@ -78,21 +66,18 @@ class S2main extends Component {
                     <NGLview  pdbfiletxt={pdbvec.pdbtex} />
                 </div>;
         }
-        let submit= false;
+        let submit = false;
+        let plot2d = null;
         if(this.state.pdb.filename != null && this.state.trajectory.filename != null){
             if(this.state.submitted) {
                 submit = false;
+                plot2d =  <Plots2/>;
             } else {
                 submit = true;
+
             }
         }
 
-        let txtmds2 = null;
-        if(this.state.txtmds2 != null ){
-            txtmds2 = <div>
-                {this.state.txtmds2}
-            </div>
-        }
         return(
         <div>
             <h2>NMR ORDER PARAMETER ANALYSIS</h2>
@@ -102,8 +87,8 @@ class S2main extends Component {
             <button onClick={this.postDataHandler} disabled={!submit} className="btn btn-danger">Submit</button>
             <div id="viewport" style={{width:'400px', height:'400px'}}></div>
             {viewNGL}
-            <button onClick={this.checksubimt}  className="btn btn-danger">CheckSubmit</button>
-            {txtmds2}
+            {plot2d}
+
         </div>
     );
     }
