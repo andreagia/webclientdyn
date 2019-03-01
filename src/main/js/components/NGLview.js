@@ -9,7 +9,8 @@ class Nglview extends Component {
         console.log("<---------------NGLTAG--------------------->");
 //        console.log(this.props.passo);
         if(!this.stage) {
-            this.stage = new NGL.Stage("viewport");
+            this.stage = new NGL.Stage(this.props.stagename);
+            this.props.getstage(this.stage);
         }
 
         if (this.stage) {
@@ -28,7 +29,9 @@ class Nglview extends Component {
                 console.log(retpdb);
                 blob = new Blob([retpdb], {type: 'text/html'});
                 //this.stage = new NGL.Stage("viewport");
-                this.stage.loadFile(blob, {ext: "pdb"}).then(
+                console.log("THIS STAGE");
+                console.log(this.stage);
+                this.stage.loadFile(blob, {name: "myProtein", ext: "pdb"}).then(
                     function (o) {
                         o.addRepresentation("cartoon", {colorScheme: "atomindex"});
                         o.autoView();

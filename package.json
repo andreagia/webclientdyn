@@ -26,6 +26,7 @@
     "ngl": "^0.10.4",
     "plotly": "^1.0.6",
     "plotly.js": "^1.45.0",
+    "rc-table": "^6.4.3",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-plotly.js": "^2.3.0"

@@ -26,11 +26,18 @@ class S2main extends Component {
         submitted: false
     };
 
+    nglstage = null;
+
     onUpdatertr = (val) => {
         console.log(val);
         this.setState({trajectory:{filename: val},pdb:{update: false}});
     };
 
+    getstagengl = (val) => {
+        this.nglstage = val;
+        console.log("NGL STAGE FROM MAIN");
+        console.log(this.nglstage);
+    };
     onUpdaterpdb = (val) => {
         console.log(val);
         this.setState({pdb:{data: val.data, filename: val.filename, update: true}});
@@ -63,7 +70,7 @@ class S2main extends Component {
 
             viewNGL =
                 <div>
-                    <NGLview  pdbfiletxt={pdbvec.pdbtex} />
+                    <NGLview  pdbfiletxt={pdbvec.pdbtex} stagename="viewportmain" getstage={this.getstagengl}/>
                 </div>;
         }
         let submit = false;
@@ -71,7 +78,7 @@ class S2main extends Component {
         if(this.state.pdb.filename != null && this.state.trajectory.filename != null){
             if(this.state.submitted) {
                 submit = false;
-                plot2d =  <Plots2/>;
+                plot2d =  <Plots2 nglstage={this.nglstage}/>;
             } else {
                 submit = true;
 
@@ -85,7 +92,7 @@ class S2main extends Component {
             <h2>{this.state.trajectory.filename}</h2>
             <FMPickpdb onUpdate={this.onUpdaterpdb}>Add File PDB </FMPickpdb>
             <button onClick={this.postDataHandler} disabled={!submit} className="btn btn-danger">Submit</button>
-            <div id="viewport" style={{width:'400px', height:'400px'}}></div>
+            <div id="viewportmain" style={{width:'400px', height:'400px'}}></div>
             {viewNGL}
             {plot2d}
 

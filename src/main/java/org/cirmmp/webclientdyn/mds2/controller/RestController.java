@@ -1,7 +1,5 @@
 package org.cirmmp.webclientdyn.mds2.controller;
 
-
-
 import org.cirmmp.webclientdyn.mds2.model.Backtxt;
 import org.cirmmp.webclientdyn.mds2.model.FormS2;
 import org.cirmmp.webclientdyn.mds2.services.RunAnalysis;
@@ -106,25 +104,42 @@ public class RestController {
     }
 
     @RequestMapping(value="checkrun", method = RequestMethod.GET)
-    public ResponseEntity<?> checkrun (){
+    public ResponseEntity<?> checkrun () {
 
         String filePath = "/tmp/mds2/mds2.out";
         StringBuilder contentBuilder = new StringBuilder();
 
         Backtxt backtxt = new Backtxt();
 
-        try (Stream<String> stream = Files.lines( Paths.get(filePath), StandardCharsets.UTF_8))
-        {
-            stream.forEach(s -> contentBuilder.append(s).append("\n"));
-            backtxt.setInfo("OK");
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
+        if (Files.exists(Paths.get(filePath))) {
+            try (Stream<String> stream = Files.lines(Paths.get(filePath), StandardCharsets.UTF_8)) {
+                stream.forEach(s -> contentBuilder.append(s).append("\n"));
+                backtxt.setInfo("OK");
+            } catch (IOException e) {
+                e.printStackTrace();
+                backtxt.setInfo("ERROR");
+            }
+            backtxt.setText(contentBuilder.toString());
+        } else {
             backtxt.setInfo("ERROR");
         }
-        backtxt.setText( contentBuilder.toString());
+
+        String filePathjson = "/tmp/mds2/tmp/iredout_s2";
+
+        StringBuilder contentBuilderjson = new StringBuilder();
+        if (Files.exists(Paths.get(filePathjson))) {
+            try (Stream<String> streamjson = Files.lines(Paths.get(filePathjson), StandardCharsets.UTF_8)) {
+                streamjson.forEach(s -> contentBuilderjson.append(s).append("\n"));
+                backtxt.setInfo("OK");
+            } catch (IOException e) {
+                e.printStackTrace();
+                backtxt.setInfo("ERROR");
+            }
+            backtxt.setIredout(contentBuilderjson.toString());
+        }
+
         return new ResponseEntity(backtxt, HttpStatus.OK);
+
     }
 
 }
