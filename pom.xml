@@ -276,7 +276,7 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.3.18.v20170406</version>
+                <version>9.3.25.v20180904</version>
                 <configuration>
 
 					<jettyXml>jetty.xml,jetty-http.xml</jettyXml>

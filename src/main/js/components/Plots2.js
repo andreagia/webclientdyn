@@ -135,6 +135,7 @@ class Plots2 extends Component {
         }
         return (
             <div className={styles.Plots2}>
+                <h2> pippopippopippopippoipipp </h2>
                 <div>{this.state.currentCount}</div>
                 {plot}
                 {table}
