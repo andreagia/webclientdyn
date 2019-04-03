@@ -28,9 +28,9 @@ else
         cd $DINPUT/tmp
     fi
 
-    python $SCRIPT/create_bv_inpt.py -v nh -p $FILEPDB -t $FILENC > $DINPUT/mds2.in
+    python2.7 $SCRIPT/create_bv_inpt.py -v nh -p $FILEPDB -t $FILENC > $DINPUT/mds2.in
     $AMBERHOME/bin/cpptraj -i $DINPUT/mds2.in
-    python $SCRIPT/csv2json.py
+    python2.7 $SCRIPT/csv2json.py
     cp $FILEPDB $WEBINF/prot.pdb
     cp $DINPUT/tmp/ired_res.json $WEBINF
 
