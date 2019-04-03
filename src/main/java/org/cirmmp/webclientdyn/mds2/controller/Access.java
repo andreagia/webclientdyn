@@ -166,7 +166,7 @@ public class Access  {
     String GetFilesNameNC()  {
 
         logger.info("----GETFILENC------ INI");
-        logger.info(CheckOnedataDir("/tmp/onedata").toString());
+       // logger.info(CheckOnedataDir("/tmp/onedata").toString());
         logger.info("----GETFILENC------ END");
 
         File root = new File("/tmp/onedata");
