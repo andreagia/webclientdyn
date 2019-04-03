@@ -10,7 +10,7 @@ if [ ! -d $DINPUT ]; then
   mkdir -p $DINPUT;
 fi
 
-export AMBERHOME=/usr/local/amber16
+export AMBERHOME=/usr/local/amber18
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$AMBERHOME/lib
 
 if pgrep -x "ccptraj" > /dev/null

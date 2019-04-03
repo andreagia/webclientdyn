@@ -2,6 +2,7 @@ package org.cirmmp.webclientdyn.mds2.controller;
 
 
 import com.google.gson.Gson;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.cirmmp.webclientdyn.mds2.chart.FileS2;
 import org.cirmmp.webclientdyn.mds2.chart.arrayBean;
@@ -22,6 +23,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -162,10 +165,33 @@ public class Access  {
     public @ResponseBody
     String GetFilesNameNC()  {
 
-        logger.info("----GETFILENC------");
+        logger.info("----GETFILENC------ INI");
         logger.info(CheckOnedataDir("/tmp/onedata").toString());
+        logger.info("----GETFILENC------ END");
 
-        File dir = CheckOnedataDir("/tmp/onedata");
+        File root = new File("/tmp/onedata");
+
+        ArrayList filPaths = new ArrayList();
+        try {
+            String[] extensions = {"nc"};
+            boolean recursive = true;
+
+            // Finds files within a root directory and optionally its
+            // subdirectories which match an array of extensions. When the
+            // extensions is null all files will be returned.
+            //
+            // This method will returns matched file as java.io.File
+            Collection files = FileUtils.listFiles(root, extensions, recursive);
+
+            for (Iterator iterator = files.iterator(); iterator.hasNext();) {
+                File file = (File) iterator.next();
+                filPaths.add(file.getAbsolutePath());
+                System.out.println("File = " + file.getAbsolutePath());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /*File dir = CheckOnedataDir("/tmp/onedata");
         if (! dir.exists()){
             dir.mkdir();
             // If you require it to make the entire directory path including parents,
@@ -174,10 +200,15 @@ public class Access  {
         FileFilter fileFilter = new WildcardFileFilter("*.nc");
         File[] files = dir.listFiles(fileFilter);
 
+        for (File file : files) {
+            if (file.isFile()) {
+                System.out.println(file.getName());
+            }
+        }
         ArrayList filPaths = new ArrayList();
         for (File file : files) {
             filPaths.add(file.getAbsolutePath());
-        }
+        }*/
         //return filPaths;
         Gson gson = new Gson();
         logger.info("GETFILESNAME");
@@ -189,7 +220,7 @@ public class Access  {
     public @ResponseBody
     String GetFilesNamePDB() {
 
-
+/*
         File dir = CheckOnedataDir("/tmp/onedata");
         FileFilter fileFilter = new WildcardFileFilter("*.pdb");
         File[] files = dir.listFiles(fileFilter);
@@ -197,8 +228,30 @@ public class Access  {
         ArrayList filPaths = new ArrayList();
         for (File file : files) {
             filPaths.add(file.getAbsolutePath());
-        }
+        }*/
         //return filPaths;
+
+        File root = new File("/tmp/onedata");
+        ArrayList filPaths = new ArrayList();
+        try {
+            String[] extensions = {"pdb"};
+            boolean recursive = true;
+
+            // Finds files within a root directory and optionally its
+            // subdirectories which match an array of extensions. When the
+            // extensions is null all files will be returned.
+            //
+            // This method will returns matched file as java.io.File
+            Collection files = FileUtils.listFiles(root, extensions, recursive);
+
+            for (Iterator iterator = files.iterator(); iterator.hasNext();) {
+                File file = (File) iterator.next();
+                filPaths.add(file.getAbsolutePath());
+                System.out.println("File = " + file.getAbsolutePath());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Gson gson = new Gson();
         logger.info("GETFILESNAME");
         logger.info(filPaths.toString());
