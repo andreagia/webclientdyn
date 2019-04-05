@@ -107,7 +107,27 @@ function callAjax() {
                 data.push(x);
 
             }
+            $('#export').click(function() {
+                console.log("-----DATA-----");
+                console.log(data);
+                console.log(data.map(a => console.log(a.res)));
 
+                let CSVString = data.reduce((s, a) => s + a.res + "," + a.s2 + "\n", "");
+                console.log("-------MODIFICA------------");
+                console.log(CSVString);
+                var downloadLink = document.createElement("a");
+                var blob = new Blob(["\ufeff", CSVString]);
+                var url = URL.createObjectURL(blob);
+                downloadLink.href = url;
+                downloadLink.download = "data.csv";
+
+                /*
+                 * Actually download CSV
+                 */
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            });
             Morris.Line({
                 element: 'morris-line-chart',
                 data: data,
