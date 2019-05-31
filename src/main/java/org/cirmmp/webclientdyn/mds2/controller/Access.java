@@ -65,8 +65,8 @@ public class Access  {
 
         String dataPath = context.getRealPath("/html/tmp");
         logger.info("RIMUOVO DATA");
-        String[] command_rm =new String[]{ "rm " , dataPath +"/prot.pdb", dataPath +"/ired_res.json"};
-       // logger.info(command_rm );
+        String[] command_rm =new String[]{ "rm" , dataPath +"/prot.pdb", dataPath +"/ired_res.json"};
+       logger.info(String.join(" ",command_rm ));
         Future<String> page1 = runAnalysis.executeCommand(command_rm);
 
         String risp = "";
