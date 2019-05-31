@@ -40,7 +40,9 @@ $(document).ready(function(){
 
 $('#getfilesnc').multiselect({
 
-    includeSelectAllOption: true
+    includeSelectAllOption: false,
+    buttonWidth: '200px'
+
 });
 
 function getFiles() {
