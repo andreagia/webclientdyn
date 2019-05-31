@@ -9,7 +9,7 @@ $(document).ready(function(){
         var frm = $('#submitForm');
         e.preventDefault();
 
-        var data = {}
+        var data = {};
         var Form = this;
 
         //Gather Data also remove undefined keys(buttons)
@@ -18,6 +18,7 @@ $(document).ready(function(){
             data[input.attr("name")] = input.val();
             delete data["undefined"];
         });
+        console.log(data);
         $.ajax({
             contentType : 'application/json; charset=utf-8',
             type: frm.attr('method'),
@@ -37,6 +38,10 @@ $(document).ready(function(){
 
 });
 
+$('#getfilesnc').multiselect({
+
+    includeSelectAllOption: true
+});
 
 function getFiles() {
 
@@ -52,6 +57,7 @@ function getFiles() {
                 var opt = $("<option>" + value + "</option>").attr("value", value);
                 dataList.append(opt);
             });
+            dataList.multiselect('rebuild');
         }
     });
     $.ajax({

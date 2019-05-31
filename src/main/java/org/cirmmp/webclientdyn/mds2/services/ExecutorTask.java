@@ -6,8 +6,8 @@ import java.io.InputStreamReader;
 
 class ExecutorTask implements Runnable{
 
-    private String command;
-    public ExecutorTask(String command){
+    private String[] command;
+    public ExecutorTask(String[] command){
         this.command = command;
     }
 
@@ -16,7 +16,7 @@ class ExecutorTask implements Runnable{
 
         Process process = null;
         try {
-            process = Runtime.getRuntime().exec(command);
+            process = Runtime.getRuntime().exec(this.command);
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line="";
             while ((line = reader.readLine()) != null) {

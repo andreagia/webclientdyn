@@ -33,7 +33,7 @@ public class RunAnalysis  {
     }
 */
     @Async("taskExecutor")
-    public Future<String> executeCommand(String command) throws InterruptedException {
+    public Future<String> executeCommand(String[] command) throws InterruptedException {
 
 
         ExecutorTask task = new ExecutorTask(command);

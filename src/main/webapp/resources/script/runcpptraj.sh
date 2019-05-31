@@ -1,8 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
 SOURCE="${BASH_SOURCE[0]}"
 SCRIPT=${1}
 WEBINF=${2}
-FILENC=${3}
+FILENC=("${!3}")
 FILEPDB=${4}
 DINPUT=/tmp/mds2
 
@@ -12,6 +13,10 @@ fi
 
 export AMBERHOME=/usr/local/amber18
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$AMBERHOME/lib
+echo "Script $SCRIPT"
+echo "WEBINF $WEBINF"
+echo "FILENC ${FILENC[@]}"
+echo "FILEPDB $FILEPDB"
 
 if pgrep -x "ccptraj" > /dev/null
 then
@@ -28,7 +33,8 @@ else
         cd $DINPUT/tmp
     fi
 
-    python2.7 $SCRIPT/create_bv_inpt.py -v nh -p $FILEPDB -t $FILENC > $DINPUT/mds2.in
+    python2.7 $SCRIPT/create_bv_inpt.py -v nh -p $FILEPDB -t ${FILENC[@]} > $DINPUT/mds2.in
+    cat $DINPUT/mds2.in
     $AMBERHOME/bin/cpptraj -i $DINPUT/mds2.in
     python2.7 $SCRIPT/csv2json.py
     cp $FILEPDB $WEBINF/prot.pdb

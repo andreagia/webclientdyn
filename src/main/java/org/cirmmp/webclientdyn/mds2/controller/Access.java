@@ -22,9 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -67,8 +65,8 @@ public class Access  {
 
         String dataPath = context.getRealPath("/html/tmp");
         logger.info("RIMUOVO DATA");
-        String command_rm = "rm " + dataPath +"/prot.pdb && rm "+ dataPath +"/ired_res.json";
-        logger.info(command_rm );
+        String[] command_rm =new String[]{ "rm " + dataPath +"/prot.pdb && rm "+ dataPath +"/ired_res.json"};
+       // logger.info(command_rm );
         Future<String> page1 = runAnalysis.executeCommand(command_rm);
 
         String risp = "";
@@ -89,8 +87,12 @@ public class Access  {
     public String runShell(@RequestBody FormS2 formS2, HttpServletRequest request) throws Exception {
 
         logger.info("----RISULTATI--------");
-        logger.info(formS2.getFileNC());
+        List<String> fileNclist = Arrays.asList(formS2.getFileNC());
+        fileNclist.forEach(a->logger.info(a));
+
         logger.info(formS2.getFilePDB());
+       // Collections.sort(fileNclist);
+        String fileNCVar = String.join(" ", fileNclist);
         logger.info("----RISULTATI--------");
         String fullPath = context.getRealPath("/resources/script/create_bv_inpt.py");
         logger.info("PATH PYTHON " + fullPath);
@@ -99,8 +101,10 @@ public class Access  {
         String webinf = fullPath.substring(0, fullPath.lastIndexOf("WEB-INF")+7);
 
         logger.info("SONO IN");
-        String command_run = "/bin/bash " + path + "runcpptraj.sh "+ path + " " + dataPath + " " + formS2.getFileNC() + " "+ formS2.getFilePDB() ;
-        logger.info(command_run);
+        String command_run1 =" arraync=(" + fileNCVar + ") ; . " + path + "runcpptraj.sh "+ path + " " + dataPath + " arraync[@] "+ formS2.getFilePDB() ;
+        String[] command_run =  new String[]{"bash", "-c", command_run1};
+
+       // logger.info(command_run);
         logger.info(webinf);
         logger.info("DATAPATH");
         logger.info(dataPath);
