@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-   <meta http-equiv="refresh" content="60">
+<!--   <meta http-equiv="refresh" content="60">-->
 
     <title>MDS2</title>
 
@@ -103,6 +103,7 @@
                 </ol>
             </fieldset>
 
+            <input type="hidden" name="multiple_value" id="multiple_value"  />
             <fieldset style="width: 300px;">
                 <input id="submitId" class="btn btn-success" type="submit" value="Run Calculation">
             </fieldset>
@@ -118,6 +119,31 @@
         <!--<button onclick="window.location.href='/service/runShell'" type="button" class="btn btn-success">Run Calculation</button>-->
         <button onclick="window.location.href='/service/rmShell'" type="button" class="btn btn-success">Remove Data</button>
         <button id="export"type="button" class="btn btn-success">export data</button>
+        <!-- Button trigger modal -->
+        <button onclick="getOutput()" type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalLong">
+            View Calculation status
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Calculation output</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="modalbody" class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="location.reload();" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-lg-6">
@@ -158,24 +184,7 @@
                              xhr.responseType = "arraybuffer";
                              xhr.send( null );*/
                         </script>
-                        <script src="/html/js/ngl/ngl.js"></script>
-                        <script>
-                            document.addEventListener("DOMContentLoaded", function () {
-                                stage = new NGL.Stage("viewport");
-                                stage.viewer.container.addEventListener("dblclick", function () {
-                                    stage.toggleFullscreen();
-                                });
-                                function handleResize() {
-                                    stage.handleResize();
-                                }
-
-                                window.addEventListener("orientationchange", handleResize, false);
-                                window.addEventListener("resize", handleResize, false);
-                                stage.loadFile("/html/tmp/prot.pdb", {defaultRepresentation: true});
-                                //if( blob ) load();
-                            });
-
-                        </script>
+<!--                        <script src="/html/js/ngl/ngl.js"></script>-->
 
                         <div id="viewport" class="img-responsive" style="width:100%; height:346px;"></div>
                     </div>
@@ -196,6 +205,8 @@
 </div>
 <!-- /#wrapper -->
 
+
+<script src='https://cdn.rawgit.com/arose/ngl/v2.0.0-dev.32/dist/ngl.js'></script>
 <!-- jQuery -->
 <script src="../vendor/jquery/jquery.min.js"></script>
 

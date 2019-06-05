@@ -21,25 +21,28 @@ echo "FILEPDB $FILEPDB"
 if pgrep -x "ccptraj" > /dev/null
 then
     echo "Running"
+    killall -9 ccptraj
 
 else
-    if [ -d "$DINPUT/tmp" ];
-     then
-        rm -rf $DINPUT/tmp/*
-        mkdir $DINPUT/tmp/
-        cd $DINPUT/tmp
-    else
-        mkdir $DINPUT/tmp/
-        cd $DINPUT/tmp
-    fi
-
-    python2.7 $SCRIPT/create_bv_inpt.py -v nh -p $FILEPDB -t ${FILENC[@]} > $DINPUT/mds2.in
-    cat $DINPUT/mds2.in
-    $AMBERHOME/bin/cpptraj -i $DINPUT/mds2.in
-    python2.7 $SCRIPT/csv2json.py
-    cp $FILEPDB $WEBINF/prot.pdb
-    cp $DINPUT/tmp/ired_res.json $WEBINF
-
-
+    echo "not runnnig"
 fi
+
+if [ -d "$DINPUT/tmp" ];
+ then
+    rm -rf $DINPUT/tmp/*
+    mkdir $DINPUT/tmp/
+    cd $DINPUT/tmp
+else
+    mkdir $DINPUT/tmp/
+    cd $DINPUT/tmp
+fi
+
+python2.7 $SCRIPT/create_bv_inpt.py -v nh -p $FILEPDB -t ${FILENC[@]} > $DINPUT/mds2.in
+cat $DINPUT/mds2.in
+$AMBERHOME/bin/cpptraj -i $DINPUT/mds2.in >  $DINPUT/mds2.out
+python2.7 $SCRIPT/csv2json.py
+cp $FILEPDB $WEBINF/prot.pdb
+cp $DINPUT/tmp/ired_res.json $WEBINF
+
+
 

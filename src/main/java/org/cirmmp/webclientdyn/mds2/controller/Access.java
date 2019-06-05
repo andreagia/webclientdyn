@@ -1,6 +1,7 @@
 package org.cirmmp.webclientdyn.mds2.controller;
 
 
+import com.google.common.base.Throwables;
 import com.google.gson.Gson;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
@@ -21,10 +22,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 
 @Controller
@@ -65,7 +71,7 @@ public class Access  {
 
         String dataPath = context.getRealPath("/html/tmp");
         logger.info("RIMUOVO DATA");
-        String[] command_rm =new String[]{ "rm" , dataPath +"/prot.pdb", dataPath +"/ired_res.json"};
+        String[] command_rm =new String[]{ "rm" , dataPath +"/prot.pdb", dataPath +"/ired_res.json", "/tmp/mds2/mds2.out"};
        logger.info(String.join(" ",command_rm ));
         Future<String> page1 = runAnalysis.executeCommand(command_rm);
 
@@ -163,6 +169,29 @@ public class Access  {
             }
             return dir;
         }
+    }
+
+    @RequestMapping(value = "/getoutput", method=RequestMethod.GET)
+    @ResponseBody
+    public String getOutput(HttpServletResponse response){
+        response.setContentType("text/plain"); 	 response.setCharacterEncoding("UTF-8");
+
+        String filePath = "/tmp/mds2/mds2.out";
+        StringBuilder contentBuilder = new StringBuilder();
+        try (Stream<String> stream = Files.lines( Paths.get(filePath), StandardCharsets.UTF_8))
+        {
+            stream.forEach(s -> contentBuilder.append(s).append("\n"));
+        }
+        catch (IOException e)
+        {
+            String stackTrace = Throwables.getStackTraceAsString(e);
+            logger.info(stackTrace);
+            return "Output not yet created";
+            //logger.info(e.printStackTrace().to);
+
+        }
+
+        return contentBuilder.toString();
     }
 
     @RequestMapping(value = "/getfilesnameNC")
