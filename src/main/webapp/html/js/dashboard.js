@@ -95,33 +95,33 @@ $(document).ready(function () {
             o.autoView();
             cartoonRepr = o.addRepresentation("cartoon", {
                 visible: false
-            })
+            });
             backboneRepr = o.addRepresentation("backbone", {
                 visible: false,
                 colorValue: "lightgrey",
                 radiusScale: 2
-            })
+            });
 
             neighborRepr = o.addRepresentation("ball+stick", {
                 sele: "none",
                 aspectRatio: 1.1,
                 colorValue: "lightgrey",
                 multipleBond: "symmetric"
-            })
+            });
             ligandRepr = o.addRepresentation("ball+stick", {
                 multipleBond: "symmetric",
                 colorValue: "grey",
                 sele: "none",
                 aspectRatio: 1.2,
                 radiusScale: 2.5
-            })
+            });
             contactRepr = o.addRepresentation("contact", {
                 sele: "none",
                 radiusSize: 0.07,
                 weakHydrogenBond: false,
                 waterHydrogenBond: false,
                 backboneHydrogenBond: true
-            })
+            });
             pocketRepr = o.addRepresentation("surface", {
                 sele: "none",
                 lazy: true,
@@ -132,7 +132,7 @@ $(document).ready(function () {
                 color: "hydrophobicity",
                 roughness: 1.0,
                 surfaceType: "av"
-            })
+            });
             labelRepr = o.addRepresentation("label", {
                 sele: "none",
                 color: "#333333",
@@ -147,7 +147,7 @@ $(document).ready(function () {
                 radiusSize: 0.8,
                 labelType: "residue",
                 labelGrouping: "residue"
-            })
+            });
 
 
         }
@@ -381,6 +381,8 @@ $(document).ready(function () {
             success: function (response) {
                 console.log("RESPONSE");
                 console.log(response);
+                console.log(typeof response);
+              //  response.sort();
                 var jsonType = JSON.parse(response);
                 var dataList = $("#getfilesnc");
                 $.each(jsonType, function (key, value) {

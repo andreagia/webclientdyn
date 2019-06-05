@@ -245,6 +245,7 @@ public class Access  {
         //return filPaths;
         Gson gson = new Gson();
         logger.info("GETFILESNAME");
+        Collections.sort(filPaths);
         logger.info(filPaths.toString());
         return gson.toJson(filPaths);
     }
