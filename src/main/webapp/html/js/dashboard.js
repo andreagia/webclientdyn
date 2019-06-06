@@ -86,7 +86,7 @@ $(document).ready(function () {
     window.addEventListener("orientationchange", handleResize, false);
     window.addEventListener("resize", handleResize, false);
 
-    stage.loadFile("/html/tmp/prot.pdb", {defaultRepresentation: true}).then(
+    stage.loadFile("/html/tmp/prot.pdb").then(
         function (o) {
             struc = o;
             console.log("STRUC1:", struc);
@@ -94,7 +94,8 @@ $(document).ready(function () {
             setChainOptions();
             o.autoView();
             cartoonRepr = o.addRepresentation("cartoon", {
-                visible: false
+                visible: true,
+                color: schemeId
             });
             backboneRepr = o.addRepresentation("backbone", {
                 visible: false,
@@ -198,8 +199,8 @@ $(document).ready(function () {
             residueSelect.value = "";
             setResidueOptions(e.target.value)
         }
-    }, {top: getTopPosition(20), left: "12px", width: "130px"})
-    addElement(chainSelect)
+    }, {top: getTopPosition(20), left: "12px", width: "130px"});
+    addElement(chainSelect);
 
     var residueSelect = createSelect([], {
         onchange: function (e) {
@@ -248,9 +249,9 @@ $(document).ready(function () {
         //spacefillRepr.setVisibility(false)
 
         ligandRepr.setVisibility(true);
-        neighborRepr.setVisibility(true);
-        contactRepr.setVisibility(true);
-        pocketRepr.setVisibility(true);
+        neighborRepr.setVisibility(false);
+        contactRepr.setVisibility(false);
+        pocketRepr.setVisibility(false);
         //  labelRepr.setVisibility(labelCheckbox.checked)
 
         ligandRepr.setSelection(sele);
@@ -269,6 +270,7 @@ $(document).ready(function () {
     }
 
 
+    var schemeId;
     function callAjax() {
 
         $.ajax({
@@ -334,6 +336,45 @@ $(document).ready(function () {
                     parseTime: false
                 });
 
+                schemeId = NGL.ColormakerRegistry.addScheme(function (params) {
+                    this.atomColor = function (atom) {
+                        let aindex = atom.residue.index;
+                        //console.log(atom.residue.index);
+                        let s2 = data.find(a=> a.res == aindex);
+                        console.log(s2);
+                        let red;
+                        let blue;
+                        if(s2) {
+                            let s2f = parseFloat(s2.s2);
+                            let colorint = Math.round(s2f * 65535);
+
+                            let scolorex = colorint.toString(16);
+                            if(scolorex.length == 1 ){
+                                blue = "0"+scolorex;
+                                red = "00";
+                            } else if(scolorex.length == 2){
+                                blue = scolorex;
+                                red = "00";
+                            } else if(scolorex.length == 3){
+                                blue = scolorex.slice(0,2);
+                                red = "0"+scolorex.slice(2,3);
+                            } else if(scolorex.length == 4){
+                                blue = scolorex.slice(0,2);
+                                red = "0"+scolorex.slice(2,4);
+                            }
+
+                            return parseInt(red + "00" + blue, 16);
+                        }
+
+                        // if (aindex < 10) {
+                        //     return 0x0000FF // blue;
+                        // } else if (aindex > 20) {
+                        //     return 0xFF0000 // red;
+                        // } else {
+                        //     return 0x00FF00 // green;
+                        // }
+                    }
+                });
                 var thisDate, thisData;
                 $("#morris-line-chart svg").on('click', function () {
                     // Find data and date in the actual morris diply below the graph.
