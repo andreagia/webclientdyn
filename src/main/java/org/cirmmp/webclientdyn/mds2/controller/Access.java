@@ -1,7 +1,6 @@
 package org.cirmmp.webclientdyn.mds2.controller;
 
 
-import com.google.common.base.Throwables;
 import com.google.gson.Gson;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
@@ -184,8 +183,8 @@ public class Access  {
         }
         catch (IOException e)
         {
-            String stackTrace = Throwables.getStackTraceAsString(e);
-            logger.info(stackTrace);
+            //String stackTrace = Throwables.getStackTraceAsString(e);
+            //logger.info(stackTrace);
             return "Output not yet created";
             //logger.info(e.printStackTrace().to);
 
